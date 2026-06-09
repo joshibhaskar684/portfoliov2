@@ -9,7 +9,7 @@ export default function page() {
             About <span className="text-blue-600">Me</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/70 max-w-3xl">
-            Computer Science Engineer | Full Stack Developer | Backend & Cloud Enthusiast
+            Computer Science Engineer | Full Stack Developer | Backend & Cloud Developer | Tech Enthusiast
           </p>
           <div className="h-1 w-20 bg-blue-600 mt-6 rounded-full mx-auto lg:mx-0"></div>
         </div>
@@ -33,7 +33,8 @@ export default function page() {
               </p>
             </section>
 
-            {/* Experience (Timeline Layout) */}
+
+
             <section>
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <span className="text-blue-600">02.</span> Experience

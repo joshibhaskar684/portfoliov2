@@ -21,7 +21,7 @@ export default function Footer() {
           
           {/* GitHub */}
           <a 
-            href="https://github.com/yourusername" 
+            href="https://github.com/joshibhaskar684" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-foreground/60 hover:text-blue-600 transition-transform duration-300 hover:scale-110"
@@ -34,7 +34,7 @@ export default function Footer() {
           
           {/* LinkedIn */}
           <a 
-            href="https://linkedin.com/in/yourusername" 
+            href="https://linkedin.com/in/bhaskar-joshi-ji" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-foreground/60 hover:text-blue-600 transition-transform duration-300 hover:scale-110"
@@ -47,7 +47,7 @@ export default function Footer() {
           
           {/* Email */}
           <a 
-            href="mailto:your.email@example.com" 
+            href="mailto:joshibhaskar684@gmail.com" 
             className="text-foreground/60 hover:text-blue-600 transition-transform duration-300 hover:scale-110"
           >
             <span className="sr-only">Email</span>
