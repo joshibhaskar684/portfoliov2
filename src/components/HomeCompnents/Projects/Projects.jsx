@@ -10,9 +10,9 @@ export default function Projects() {
         
         {/* Section Header */}
         <div className="mb-12 md:mb-16 text-center md:text-left flex flex-col md:items-start items-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight">
             Featured <span className="text-blue-600">Projects</span>
-          </h1>
+          </h2>
           <p className="text-base md:text-lg lg:text-xl text-foreground/70 max-w-2xl leading-relaxed">
             Here are some of the projects I have worked on, showcasing my expertise in building scalable, cloud-native applications.
           </p>

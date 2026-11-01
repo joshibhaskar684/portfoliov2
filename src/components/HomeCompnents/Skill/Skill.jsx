@@ -4,6 +4,10 @@ import {
   SiMysql,
   SiDocker,
   SiSpringboot,
+  SiNestjs,
+  SiNodedotjs,
+  SiSupabase,
+  SiMinio,
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 
@@ -27,12 +31,14 @@ const skillCategories = [
     skills: [
       { name: 'Java', icon: <FaJava className="text-orange-600" /> },
       { name: 'Spring Boot', icon: <SiSpringboot className="text-green-600" /> },
+      { name: 'NestJS', icon: <SiNestjs className="text-[#E0234E]" /> },
+      { name: 'Node.js', icon: <SiNodedotjs className="text-[#5FA04E]" /> },
       { name: 'REST APIs', icon: <span className="text-gray-500">API</span> },
       { name: 'Microservices', icon: <span className="text-gray-500">MS</span> },
     ]
   },
   {
-    title: "Databases",
+    title: "Databases & Storage",
     skills: [
       { name: 'MySQL', icon: <SiMysql className="text-blue-700" /> },
       { name: 'PostgreSQL', icon: <span className="text-indigo-600">🐘</span> },
@@ -40,12 +46,16 @@ const skillCategories = [
       { name: 'Redis', icon: <span className="text-red-500">⚡</span> },
       { name: 'Firebase', icon: <span className="text-yellow-500">🔥</span> },
       { name: 'Elasticsearch', icon: <span className="text-sky-600">🔎</span> },
+      { name: 'Supabase', icon: <SiSupabase className="text-[#3FCF8E]" /> },
+      { name: 'MinIO', icon: <SiMinio className="text-[#C72E49]" /> },
     ]
   },
   {
     title: "Cloud & DevOps",
     skills: [
       { name: 'AWS', icon: <span className="text-orange-500">☁️</span> },
+      { name: 'AWS EC2', icon: <span className="text-orange-500">🖥️</span> },
+      { name: 'AWS RDS', icon: <span className="text-blue-600">🗄️</span> },
       { name: 'Docker', icon: <SiDocker className="text-blue-400" /> },
       { name: 'Docker Compose', icon: <span className="text-blue-400">🐳</span> },
       { name: 'Docker Swarm', icon: <span className="text-blue-500">🐳</span> },

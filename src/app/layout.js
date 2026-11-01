@@ -1,38 +1,65 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import AiBot from "@/components/ai/AiBoat";
+import { SITE_URL, siteData } from "@/components/data/siteData";
 
+// Self-hosted by next/font, so no render-blocking request to Google Fonts.
+const josefinSans = Josefin_Sans({
+  subsets: ["latin"],
+  variable: "--font-josefin-sans",
+});
 
 export const metadata = {
-  title: "Bhaskar Joshi",
-  description: "",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: siteData.title,
+    template: `%s | ${siteData.name}`,
+  },
+  description: siteData.description,
+  applicationName: siteData.name,
+  authors: [{ name: siteData.name, url: SITE_URL }],
+  creator: siteData.name,
+  publisher: siteData.name,
+  keywords: siteData.keywords,
+  category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  // Google Search Console HTML-tag verification; omitted when unset.
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`h-full antialiased`}
+      className={`${josefinSans.variable} h-full antialiased`}
     >
-
-      <head>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet"/>
-
-        </head>
-
-      
       <body className="">
           <Navbar/>
           {children}
           <Footer/>
           <AiBot/>
-
-          </body>
-      
+      </body>
     </html>
   );
 }

@@ -1,6 +1,23 @@
+import { experienceData } from "@/components/data/experienceData";
+import JsonLd from "@/components/seo/JsonLd";
+import { pageMetadata } from "@/components/seo/metadata";
+import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/schema";
+
+const title = "About – Experience, Education & Skills";
+const description =
+  "Bhaskar Joshi's experience, education and skills: Software Engineer at Quana, ex-Full Stack intern at White Water Solutions, B.Tech CSE at Surajmal University.";
+
+export const metadata = pageMetadata({ title, description, path: "/about" });
+
 export default function page() {
   return (
     <section className="min-h-screen bg-background text-foreground py-20">
+      <JsonLd
+        data={jsonLdGraph(
+          webPageSchema({ type: "AboutPage", path: "/about", name: `${title} | Bhaskar Joshi`, description }),
+          breadcrumbSchema("/about", "About")
+        )}
+      />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         
         {/* Header */}
@@ -9,7 +26,7 @@ export default function page() {
             About <span className="text-blue-600">Me</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/70 max-w-3xl">
-            Computer Science Engineer | Full Stack Developer | Backend & Cloud Developer | Tech Enthusiast
+            Software Engineer at Quana | Full Stack Developer | Backend & Cloud Developer | Computer Science Engineer
           </p>
           <div className="h-1 w-20 bg-blue-600 mt-6 rounded-full mx-auto lg:mx-0"></div>
         </div>
@@ -26,10 +43,16 @@ export default function page() {
                 <span className="text-blue-600">01.</span> Professional Summary
               </h2>
               <p className="text-foreground/80 leading-relaxed text-lg">
-                Motivated Computer Science Engineering student (B.Tech, 2023–2027) with strong foundations in Data Structures & Algorithms,
-                Operating Systems, and Computer Networks. Skilled in full-stack and backend development using React.js, Next.js, Java,
-                Spring Boot, Kafka, Redis, SQL/NoSQL databases, and microservices architecture. Experienced in building scalable cloud-native
-                applications using Docker, AWS, and CI/CD pipelines. Passionate about distributed systems, system design, and Agentic AI.
+                I&apos;m Bhaskar Joshi, a Software Engineer at Quana and a Computer Science Engineering student (B.Tech, 2023–2027) based in
+                Haldwani, Uttarakhand, India. At Quana, I migrated the production database, with all existing customer data, from Supabase
+                to AWS RDS and moved the application from a Hostinger VPS to AWS EC2. Before that, I completed a Full Stack Developer
+                internship at White Water Solutions and frontend, backend, and DevOps internships at VhBuyio.
+              </p>
+              <p className="text-foreground/80 leading-relaxed text-lg mt-4">
+                Skilled in full-stack and backend development using React.js, Next.js, Java, Spring Boot, NestJS, Kafka, Redis, MinIO,
+                SQL/NoSQL databases, and microservices architecture, with strong foundations in Data Structures & Algorithms, Operating
+                Systems, and Computer Networks. Experienced in building scalable cloud-native applications using Docker, AWS, and CI/CD
+                pipelines. Passionate about distributed systems, system design, and Agentic AI.
               </p>
             </section>
 
@@ -40,40 +63,18 @@ export default function page() {
                 <span className="text-blue-600">02.</span> Experience
               </h2>
               <div className="space-y-8 border-l-2 border-blue-600/30 ml-3 pl-6 relative">
-                
-                {/* Experience Item 1 */}
-                <div className="relative">
-                  <div className="absolute -left-[35px] top-1.5 w-4 h-4 bg-background border-4 border-blue-600 rounded-full"></div>
-                  <h3 className="text-xl font-bold text-foreground">Backend & DevOps Intern</h3>
-                  <div className="text-blue-600 font-medium mb-2">VhBuyio <span className="text-foreground/50 mx-2">•</span> Sep 2025 – Nov 2025</div>
-                  <ul className="list-disc ml-5 space-y-1 text-foreground/80">
-                    <li>Worked with Docker, AWS EC2, and GitHub Actions.</li>
-                    <li>Built CI/CD pipelines and deployment workflows.</li>
-                    <li>Managed and optimized containerized backend systems.</li>
-                  </ul>
-                </div>
-
-                {/* Experience Item 2 */}
-                <div className="relative">
-                  <div className="absolute -left-[35px] top-1.5 w-4 h-4 bg-background border-4 border-blue-600 rounded-full"></div>
-                  <h3 className="text-xl font-bold text-foreground">Frontend Developer Intern</h3>
-                  <div className="text-blue-600 font-medium mb-2">VhBuyio <span className="text-foreground/50 mx-2">•</span> Jun 2025 – Aug 2025</div>
-                  <ul className="list-disc ml-5 space-y-1 text-foreground/80">
-                    <li>Built highly responsive web apps using Next.js and Redux.</li>
-                    <li>Created reusable UI components and significantly improved client-side performance.</li>
-                  </ul>
-                </div>
-
-                <div className="relative">
-                  <div className="absolute -left-[35px] top-1.5 w-4 h-4 bg-background border-4 border-blue-600 rounded-full"></div>
-                  <h3 className="text-xl font-bold text-foreground">FullStack Developer Intern</h3>
-                  <div className="text-blue-600 font-medium mb-2">White Water Solutions India Pvt Ltd <span className="text-foreground/50 mx-2">•</span> Jun 2026 – Aug 2026</div>
-                  <ul className="list-disc ml-5 space-y-1 text-foreground/80">
-                    <li>Built highly responsive web apps using Next.js and Redux.</li>
-                    <li>Building and maintaining full-stack web applications using modern frontend and backend technologies, developing responsive user interfaces, integrating REST APIs, and contributing to scalable application architecture and performance improvements.</li>
-                  </ul>
-                </div>
-
+                {experienceData.map((exp) => (
+                  <div key={`${exp.company}-${exp.role}`} className="relative">
+                    <div className="absolute -left-[35px] top-1.5 w-4 h-4 bg-background border-4 border-blue-600 rounded-full"></div>
+                    <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
+                    <div className="text-blue-600 font-medium mb-2">{exp.company} <span className="text-foreground/50 mx-2">•</span> {exp.duration}</div>
+                    <ul className="list-disc ml-5 space-y-1 text-foreground/80">
+                      {exp.highlights.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -138,9 +139,9 @@ export default function page() {
               <h3 className="text-xl font-bold mb-4 border-b border-foreground/10 pb-2">Tech Focus</h3>
               <div className="space-y-3 text-sm text-foreground/80">
                 <p><strong className="text-foreground">Frontend:</strong> React, Next.js, Tailwind</p>
-                <p><strong className="text-foreground">Backend:</strong> Java, Spring Boot, Microservices</p>
-                <p><strong className="text-foreground">Cloud:</strong> AWS, Docker, CI/CD</p>
-                <p><strong className="text-foreground">Data:</strong> SQL, MongoDB, Redis, Kafka</p>
+                <p><strong className="text-foreground">Backend:</strong> Java, Spring Boot, NestJS, Microservices</p>
+                <p><strong className="text-foreground">Cloud:</strong> AWS (EC2, RDS), Docker, CI/CD</p>
+                <p><strong className="text-foreground">Data:</strong> SQL, MongoDB, Redis, Kafka, MinIO</p>
               </div>
             </div>
 

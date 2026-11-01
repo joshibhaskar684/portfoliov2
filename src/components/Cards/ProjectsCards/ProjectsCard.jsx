@@ -9,6 +9,8 @@ export default function ProjectCard({ image, title, description, href, viewmore 
         <img
           src={image}
           alt={title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {/* Subtle blue tint on hover */}
@@ -19,9 +21,9 @@ export default function ProjectCard({ image, title, description, href, viewmore 
       <div className="flex flex-col flex-grow p-6 md:p-8">
         
         {/* Title */}
-        <h2 className="text-xl md:text-2xl font-bold line-clamp-2 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+        <h3 className="text-xl md:text-2xl font-bold line-clamp-2 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
           {title}
-        </h2>
+        </h3>
 
         {/* Description */}
         <p className="text-foreground/70 text-sm md:text-base line-clamp-4 mb-6 flex-grow leading-relaxed">

@@ -14,13 +14,14 @@ export default function Experience() {
 
         {/* Section Header */}
         <div className="mb-12 md:mb-16 text-center md:text-left flex flex-col md:items-start items-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight">
             Work <span className="text-blue-600">Experience</span>
-          </h1>
+          </h2>
 
           <p className="text-base md:text-lg lg:text-xl text-foreground/70 max-w-2xl leading-relaxed">
-            My internship experiences where I contributed to frontend and backend
-            development, building scalable applications and improving system performance.
+            From frontend, backend, and DevOps internships to my current role as a
+            Software Engineer at Quana, building scalable applications, migrating
+            production systems to AWS, and improving system performance.
           </p>
 
           <div className="h-1 w-24 bg-blue-600 mt-6 rounded-full"></div>

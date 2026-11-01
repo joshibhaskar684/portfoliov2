@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -17,8 +19,8 @@ export default function HeroSection() {
 
   const techStack = [
     "Microservices", "AWS", "Kubernetes", "Kafka",
-    "Spring Boot", "Next.js", "Docker", "Nginx",
-    "Redis", "Elasticsearch", "CI/CD", "Terraform",
+    "Spring Boot", "NestJS", "Next.js", "Docker", "Nginx",
+    "Redis", "MinIO", "Elasticsearch", "CI/CD", "Terraform",
   ];
 
   return (
@@ -39,7 +41,7 @@ export default function HeroSection() {
               data-aos="fade-up" 
               className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 tracking-tight"
             >
-              Hello, I'm <br className="hidden sm:block" />
+              Hello, I&apos;m <br className="hidden sm:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700 drop-shadow-sm">
                 Bhaskar Joshi
               </span>
@@ -51,7 +53,7 @@ export default function HeroSection() {
               data-aos-delay="100"
               className="text-xl md:text-2xl lg:text-3xl font-bold mb-6 text-foreground/90"
             >
-              Software Engineer | Scalable Backend & Cloud Systems
+              Software Engineer at Quana | Scalable Backend & Cloud Systems
             </h2>
 
             {/* Description */}
@@ -60,7 +62,7 @@ export default function HeroSection() {
               data-aos-delay="200"
               className="text-base md:text-lg lg:text-xl mb-8 text-foreground/70 max-w-2xl leading-relaxed"
             >
-              I design and build scalable microservices using Java, Spring Boot, React, and AWS, focusing on performance, reliability, and cloud-native architecture.
+              I design and build scalable microservices and full-stack applications using Java, Spring Boot, NestJS, React, and AWS, focusing on performance, reliability, and cloud-native architecture.
             </p>
 
             {/* Tech Tags (Pills) */}
@@ -89,9 +91,9 @@ export default function HeroSection() {
                 Download Resume
               </button>
 
-              <button className="px-8 py-3.5 md:py-4 rounded-xl bg-blue-600 font-semibold text-base md:text-lg text-white hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1 w-full sm:w-auto text-center">
+              <Link href="/contact" className="px-8 py-3.5 md:py-4 rounded-xl bg-blue-600 font-semibold text-base md:text-lg text-white hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1 w-full sm:w-auto text-center">
                 Contact Me
-              </button>
+              </Link>
             </div>
 
           </div>
@@ -107,11 +109,14 @@ export default function HeroSection() {
             
             {/* Image Wrapper */}
             <div className="relative rounded-[2rem] overflow-hidden border border-foreground/10 shadow-2xl aspect-square bg-foreground/5 z-10">
-              {/* Replace this src with your actual photo */}
-              <img 
-                src="https://joshibhaskar684.github.io/bhaskar_joshi/tcsprofile1.png" 
-                alt="Bhaskar Joshi Coding" 
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              <Image
+                src="/bhaskar.jpg"
+                alt="Bhaskar Joshi, Software Engineer at Quana"
+                fill
+                sizes="(max-width: 496px) calc(100vw - 48px), 448px"
+                loading="eager"
+                fetchPriority="high"
+                className="object-cover transition-transform duration-700 hover:scale-105"
               />
               
               {/* Subtle overlay gradient to blend image with dark mode */}
@@ -124,8 +129,8 @@ export default function HeroSection() {
                 🚀
               </div>
               <div>
-                <p className="text-xs text-foreground/60 font-medium">Currently building</p>
-                <p className="text-sm font-bold text-foreground">Cloud Solutions</p>
+                <p className="text-xs text-foreground/60 font-medium">Currently</p>
+                <p className="text-sm font-bold text-foreground">Software Engineer @ Quana</p>
               </div>
             </div>
           </div>
