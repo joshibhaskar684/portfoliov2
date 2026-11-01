@@ -27,6 +27,11 @@ export const faqData = [
       "Bhaskar Joshi's projects include Quick, a cloud-native distributed e-commerce platform built with Next.js, Spring Boot microservices, Kafka, Elasticsearch and AWS; Tasker, an event-driven task management system using Spring Boot and Kafka; and an AI chat backend that runs local LLMs such as Llama 3 with Spring AI and Ollama.",
   },
   {
+    question: "What is Bhaskar Joshi's GitHub username?",
+    answer:
+      "Bhaskar Joshi's GitHub username is joshibhaskar684. Bhaskar's projects and source code, including the Spring AI and Ollama chat backend, are published at github.com/joshibhaskar684, and system design projects are in the SystemDesign repository at github.com/joshibhaskar684/SystemDesign.",
+  },
+  {
     question: "How can I contact Bhaskar Joshi?",
     answer:
       "You can email Bhaskar Joshi at joshibhaskar684@gmail.com, connect on LinkedIn at linkedin.com/in/bhaskar-joshi-ji, see projects on GitHub at github.com/joshibhaskar684, or send a message through the contact page on this site.",

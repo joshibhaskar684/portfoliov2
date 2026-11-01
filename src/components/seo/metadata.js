@@ -21,6 +21,7 @@ export function pageMetadata({ title, description, path }) {
       type: "profile",
       firstName: siteData.givenName,
       lastName: siteData.familyName,
+      username: siteData.githubUsername,
       siteName: siteData.name,
       locale: "en_US",
       url: path,

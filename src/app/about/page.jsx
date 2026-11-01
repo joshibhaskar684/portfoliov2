@@ -128,7 +128,7 @@ export default function page() {
                     <span>💼</span> LinkedIn Profile
                   </a>
                   <a href="https://github.com/joshibhaskar684" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                    <span>💻</span> GitHub Repository
+                    <span>💻</span> GitHub (joshibhaskar684)
                   </a>
                 </div>
               </div>

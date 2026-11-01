@@ -13,10 +13,13 @@ export const SITE_URL = (
 export const absoluteUrl = (path = "/") =>
   path === "/" ? SITE_URL : `${SITE_URL}${path}`;
 
+const githubUsername = "joshibhaskar684";
+
 export const siteData = {
   name: "Bhaskar Joshi",
   givenName: "Bhaskar",
   familyName: "Joshi",
+  githubUsername,
   jobTitle: "Software Engineer",
   company: "Quana",
   title: "Bhaskar Joshi | Software Engineer – Full Stack, Backend & AWS",
@@ -38,8 +41,9 @@ export const siteData = {
   },
   social: {
     linkedin: "https://www.linkedin.com/in/bhaskar-joshi-ji/",
-    github: "https://github.com/joshibhaskar684",
+    github: `https://github.com/${githubUsername}`,
   },
+  systemDesignRepo: `https://github.com/${githubUsername}/SystemDesign`,
   knowsAbout: [
     "Software Engineering",
     "Full Stack Development",
@@ -78,6 +82,9 @@ export const siteData = {
     "Bhaskar Joshi Quana",
     "Bhaskar Joshi portfolio",
     "Bhaskar Joshi Haldwani",
+    "Bhaskar Joshi GitHub",
+    githubUsername,
+    `${githubUsername} GitHub`,
     "Software Engineer",
     "Full Stack Developer",
     "Backend Developer",

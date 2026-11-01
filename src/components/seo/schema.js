@@ -5,13 +5,15 @@ const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 
 function personSchema() {
-  const { name, givenName, familyName, jobTitle, company, description, email, image, location, education, social, knowsAbout } =
+  const { name, givenName, familyName, githubUsername, jobTitle, company, description, email, image, location, education, social, knowsAbout } =
     siteData;
 
   return {
     "@type": "Person",
     "@id": PERSON_ID,
     name,
+    // Google's ProfilePage docs use alternateName for the person's handle.
+    alternateName: githubUsername,
     givenName,
     familyName,
     url: SITE_URL,
