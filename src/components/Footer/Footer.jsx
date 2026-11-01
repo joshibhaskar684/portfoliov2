@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="w-full bg-background text-foreground border-t border-gray-200 dark:border-gray-800 py-8 mt-12">
@@ -7,13 +9,14 @@ export default function Footer() {
         <div className="text-sm md:text-base text-foreground/70 text-center md:text-left">
           <p>
             © {new Date().getFullYear()} Developed by{" "}
-            <a 
-              href="/" 
+            <Link
+              href="/"
               className="font-bold text-foreground hover:text-blue-600 transition-colors duration-300"
             >
               Bhaskar Joshi
-            </a>. All rights reserved.
+            </Link>. All rights reserved.
           </p>
+          <p className="mt-1">Software Engineer · Haldwani, Uttarakhand, India</p>
         </div>
 
         {/* Social / Contact Links */}

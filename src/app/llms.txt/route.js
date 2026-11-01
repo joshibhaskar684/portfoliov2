@@ -8,7 +8,7 @@ import { projectsdata } from "@/components/data/projectsdat";
 export const dynamic = "force-static";
 
 export function GET() {
-  const { name, githubUsername, jobTitle, company, description, email, location, education, social, systemDesignRepo, knowsAbout } =
+  const { name, nameHindi, githubUsername, jobTitle, company, description, email, location, education, social, systemDesignRepo, knowsAbout } =
     siteData;
 
   const lines = [
@@ -16,6 +16,7 @@ export function GET() {
     "",
     `> ${description}`,
     "",
+    `- Name in Hindi: ${nameHindi}`,
     `- Current role: ${jobTitle} at ${company}`,
     `- Location: ${location.city}, ${location.region}, ${location.country}`,
     `- Education: ${education.degree}, ${education.school}, ${education.city} (${education.years})`,

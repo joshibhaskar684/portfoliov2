@@ -7,6 +7,11 @@ export const faqData = [
       "Bhaskar Joshi is a Software Engineer at Quana, based in Haldwani, Uttarakhand, India. Bhaskar builds scalable full-stack, backend and cloud systems with Java, Spring Boot, NestJS, Next.js, React and AWS, and is pursuing a B.Tech in Computer Science Engineering at Surajmal University, Kichha (2023–2027).",
   },
   {
+    question: "Where is Bhaskar Joshi based?",
+    answer:
+      "Bhaskar Joshi is based in Haldwani, a city in the Nainital district of Uttarakhand, India. Bhaskar works as a Software Engineer at Quana and is pursuing a B.Tech in Computer Science Engineering at Surajmal University in Kichha, Uttarakhand.",
+  },
+  {
     question: "What does Bhaskar Joshi do at Quana?",
     answer:
       "As a Software Engineer at Quana, Bhaskar Joshi works on backend and cloud infrastructure. Bhaskar migrated Quana's production database, with all existing customer data, from Supabase to AWS RDS, and moved the application from a Hostinger VPS to AWS EC2.",

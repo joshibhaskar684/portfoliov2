@@ -5,19 +5,38 @@ const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
 
 function personSchema() {
-  const { name, givenName, familyName, githubUsername, jobTitle, company, description, email, image, location, education, social, knowsAbout } =
-    siteData;
+  const {
+    name,
+    nameHindi,
+    givenName,
+    familyName,
+    githubUsername,
+    jobTitle,
+    company,
+    description,
+    email,
+    image,
+    location,
+    education,
+    social,
+    knowsAbout,
+  } = siteData;
 
   return {
     "@type": "Person",
     "@id": PERSON_ID,
     name,
-    // Google's ProfilePage docs use alternateName for the person's handle.
-    alternateName: githubUsername,
+    // The GitHub handle (Google's ProfilePage docs use alternateName for
+    // handles) and the Hindi spelling, so searches for either resolve here.
+    alternateName: [githubUsername, nameHindi],
     givenName,
     familyName,
     url: SITE_URL,
-    image: absoluteUrl(image),
+    image: {
+      "@type": "ImageObject",
+      url: absoluteUrl(image),
+      caption: `${name}, ${jobTitle} based in ${location.city}, ${location.region}`,
+    },
     email,
     jobTitle,
     description,
@@ -37,6 +56,17 @@ function personSchema() {
       addressLocality: location.city,
       addressRegion: location.region,
       addressCountry: location.countryCode,
+    },
+    homeLocation: {
+      "@type": "City",
+      name: location.city,
+      alternateName: location.cityHindi,
+      sameAs: location.sameAs,
+      containedInPlace: {
+        "@type": "State",
+        name: location.region,
+        containedInPlace: { "@type": "Country", name: location.country },
+      },
     },
     knowsAbout,
     sameAs: [social.linkedin, social.github],

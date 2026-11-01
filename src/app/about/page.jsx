@@ -5,7 +5,7 @@ import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/s
 
 const title = "About – Experience, Education & Skills";
 const description =
-  "Bhaskar Joshi's experience, education and skills: Software Engineer at Quana, ex-Full Stack intern at White Water Solutions, B.Tech CSE at Surajmal University.";
+  "Bhaskar Joshi from Haldwani, Uttarakhand: Software Engineer at Quana, ex-Full Stack intern at White Water Solutions, B.Tech CSE at Surajmal University.";
 
 export const metadata = pageMetadata({ title, description, path: "/about" });
 

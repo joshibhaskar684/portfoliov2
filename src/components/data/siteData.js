@@ -17,21 +17,25 @@ const githubUsername = "joshibhaskar684";
 
 export const siteData = {
   name: "Bhaskar Joshi",
+  nameHindi: "भास्कर जोशी",
   givenName: "Bhaskar",
   familyName: "Joshi",
   githubUsername,
   jobTitle: "Software Engineer",
   company: "Quana",
-  title: "Bhaskar Joshi | Software Engineer – Full Stack, Backend & AWS",
+  title: "Bhaskar Joshi | Software Engineer from Haldwani, Uttarakhand",
   description:
-    "Bhaskar Joshi is a Software Engineer at Quana building scalable full-stack, backend and cloud systems with Java, Spring Boot, NestJS, Next.js, React and AWS.",
+    "Bhaskar Joshi is a Software Engineer at Quana, based in Haldwani, India, building full-stack, backend and cloud systems with Java, Spring Boot, NestJS and AWS.",
   email: "joshibhaskar684@gmail.com",
-  image: "/bhaskar.jpg",
+  image: "/bhaskar-joshi.jpg",
   location: {
     city: "Haldwani",
+    cityHindi: "हल्द्वानी",
     region: "Uttarakhand",
     country: "India",
     countryCode: "IN",
+    // Wikipedia and Wikidata entries that pin "Haldwani" to the right place.
+    sameAs: ["https://en.wikipedia.org/wiki/Haldwani", "https://www.wikidata.org/wiki/Q1707839"],
   },
   education: {
     degree: "B.Tech in Computer Science Engineering",
@@ -86,7 +90,9 @@ export const siteData = {
     githubUsername,
     `${githubUsername} GitHub`,
     "Software Engineer",
+    "Software Engineer Haldwani",
     "Full Stack Developer",
+    "Full Stack Developer Haldwani",
     "Backend Developer",
     "Cloud Engineer",
     "Java Spring Boot Developer",

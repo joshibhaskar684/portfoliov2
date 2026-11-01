@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { siteData } from "@/components/data/siteData";
 
-// public/bhaskar.jpg is a 570×713 portrait on a white background.
+// The portrait in public/ is 570×713 on a white background.
 const SOURCE = { width: 570, height: 713 };
 
 // Square regions of the source ({ x, y, side }) used by generated images.
@@ -9,7 +10,7 @@ export const HEADSHOT_CROP = { x: 5, y: 10, side: 560 };
 export const FACE_CROP = { x: 30, y: 87, side: 440 };
 
 export async function loadPortrait() {
-  const data = await readFile(join(process.cwd(), "public/bhaskar.jpg"), "base64");
+  const data = await readFile(join(process.cwd(), "public", siteData.image), "base64");
   return `data:image/jpeg;base64,${data}`;
 }
 

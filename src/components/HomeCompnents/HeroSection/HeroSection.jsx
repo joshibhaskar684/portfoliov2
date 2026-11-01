@@ -62,7 +62,7 @@ export default function HeroSection() {
               data-aos-delay="200"
               className="text-base md:text-lg lg:text-xl mb-8 text-foreground/70 max-w-2xl leading-relaxed"
             >
-              I design and build scalable microservices and full-stack applications using Java, Spring Boot, NestJS, React, and AWS, focusing on performance, reliability, and cloud-native architecture.
+              Based in Haldwani, Uttarakhand, India, I design and build scalable microservices and full-stack applications using Java, Spring Boot, NestJS, React, and AWS, focusing on performance, reliability, and cloud-native architecture.
             </p>
 
             {/* Tech Tags (Pills) */}
@@ -110,8 +110,8 @@ export default function HeroSection() {
             {/* Image Wrapper */}
             <div className="relative rounded-[2rem] overflow-hidden border border-foreground/10 shadow-2xl aspect-square bg-foreground/5 z-10">
               <Image
-                src="/bhaskar.jpg"
-                alt="Bhaskar Joshi, Software Engineer at Quana"
+                src="/bhaskar-joshi.jpg"
+                alt="Bhaskar Joshi, Software Engineer based in Haldwani, Uttarakhand"
                 fill
                 sizes="(max-width: 496px) calc(100vw - 48px), 448px"
                 loading="eager"
