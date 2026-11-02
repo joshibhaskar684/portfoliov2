@@ -1,4 +1,5 @@
 import { experienceData } from "@/components/data/experienceData";
+import { SITE_URL } from "@/components/data/siteData";
 import JsonLd from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/components/seo/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/schema";
@@ -121,7 +122,7 @@ export default function page() {
                 </p>
                 
                 <div className="pt-4 mt-4 border-t border-foreground/10 flex flex-col gap-3">
-                  <a href="https://bhaskarjoshiportfolio.vercel.app" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
+                  <a href={SITE_URL} className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
                     <span>🌐</span> Portfolio Website
                   </a>
                   <a href="https://linkedin.com/in/bhaskar-joshi-ji/" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
