@@ -1,14 +1,8 @@
 // Canonical origin used by metadata, the sitemap, robots.txt, llms.txt and
-// structured data. Set NEXT_PUBLIC_SITE_URL to pin a custom domain; on Vercel
-// the project's production domain is picked up automatically.
-const vercelProductionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (vercelProductionHost
-    ? `https://${vercelProductionHost}`
-    : "https://bhaskarjoshiportfolio.vercel.app")
-).replace(/\/+$/, "");
+// structured data. Pinned rather than read from the deployment: the project
+// serves several domains, and every one of them must point search engines
+// here. next.config.mjs redirects the other domains to it.
+export const SITE_URL = "https://www.bhaskarjoshi.online";
 
 export const absoluteUrl = (path = "/") =>
   path === "/" ? SITE_URL : `${SITE_URL}${path}`;
