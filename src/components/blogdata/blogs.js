@@ -9,7 +9,27 @@ const BLOG_DIR = path.join(process.cwd(), "src/components/blogdata");
 
 const WORDS_PER_MINUTE = 200;
 
+// A `## FAQ` or `## Frequently asked questions` section whose `###` headings
+// are questions becomes FAQPage structured data for the post.
+const FAQ_HEADING = /^## (?:FAQ|Frequently asked questions)\s*$/im;
+
 const unquote = (value) => value.trim().replace(/^(["'])(.*)\1$/, "$2");
+
+// Plain text of inline Markdown: link text is kept, code and bold marks dropped.
+const stripMarkdown = (text) =>
+  text
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/`|\*\*?/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+// Heading ids. The post page builds the same id from the rendered heading.
+export const slugify = (text) =>
+  text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
 
 // Reads the `key: value` block between the leading `---` lines. Values
 // written as `[a, b, c]` become arrays.
@@ -33,10 +53,35 @@ function parseFrontmatter(raw) {
   return { data, content: raw.slice(match[0].length) };
 }
 
+// `##` headings, for the post's table of contents.
+function extractHeadings(prose) {
+  return [...prose.matchAll(/^## (.+)$/gm)].map(([, heading]) => {
+    const text = stripMarkdown(heading);
+    return { text, id: slugify(text) };
+  });
+}
+
+function extractFaqs(prose) {
+  const start = prose.search(FAQ_HEADING);
+  if (start === -1) return [];
+
+  const section = prose.slice(start).split(/\n## /)[0];
+  return section
+    .split(/^### /m)
+    .slice(1)
+    .map((block) => {
+      const [question, ...answer] = block.split("\n");
+      return { question: stripMarkdown(question), answer: stripMarkdown(answer.join(" ")) };
+    })
+    .filter(({ answer }) => answer);
+}
+
 function readBlog(id) {
   const raw = fs.readFileSync(path.join(BLOG_DIR, `${id}.md`), "utf8");
   const { data, content } = parseFrontmatter(raw);
-  const words = content.split(/\s+/).filter(Boolean).length;
+  // Code blocks can hold `#` comments that look like headings.
+  const prose = content.replace(/^```[\s\S]*?^```/gm, "");
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
 
   return {
     id,
@@ -45,9 +90,13 @@ function readBlog(id) {
     date: data.date ?? "",
     updated: data.updated || null,
     tags: data.tags ?? [],
+    keywords: data.keywords ?? [],
     cover: data.cover || null,
     draft: data.draft === "true",
-    readingTime: Math.max(1, Math.round(words / WORDS_PER_MINUTE)),
+    wordCount,
+    readingTime: Math.max(1, Math.round(wordCount / WORDS_PER_MINUTE)),
+    headings: extractHeadings(prose),
+    faqs: extractFaqs(prose),
     content,
   };
 }

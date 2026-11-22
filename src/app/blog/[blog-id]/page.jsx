@@ -2,10 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { formatBlogDate, getAllBlogs, getBlogById } from "@/components/blogdata/blogs";
+import { formatBlogDate, getAllBlogs, getBlogById, slugify } from "@/components/blogdata/blogs";
 import JsonLd from "@/components/seo/JsonLd";
 import { articleMetadata } from "@/components/seo/metadata";
-import { blogPostingSchema, breadcrumbSchema, jsonLdGraph } from "@/components/seo/schema";
+import { blogPostingSchema, breadcrumbSchema, faqPageSchema, jsonLdGraph } from "@/components/seo/schema";
 
 // Every post is prerendered at build time; any other id is a 404.
 export const dynamicParams = false;
@@ -26,12 +26,37 @@ export async function generateMetadata({ params }) {
     publishedTime: blog.date,
     modifiedTime: blog.updated,
     tags: blog.tags,
-    image: blog.cover,
+    keywords: blog.keywords,
   });
 }
 
-// External links in a post open in a new tab.
+const textOf = (node) => {
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  return node?.props?.children ? textOf(node.props.children) : "";
+};
+
+// Headings get ids so the table of contents, search results and shared links
+// can jump straight to a section. scroll-mt keeps them below the sticky navbar.
+const headingWithId = (Tag) =>
+  function Heading({ children }) {
+    return (
+      <Tag id={slugify(textOf(children))} className="scroll-mt-24">
+        {children}
+      </Tag>
+    );
+  };
+
+// External links in a post open in a new tab. Wide tables scroll on their
+// own instead of making the whole page scroll sideways on phones.
 const markdownComponents = {
+  h2: headingWithId("h2"),
+  h3: headingWithId("h3"),
+  table: ({ children }) => (
+    <div className="overflow-x-auto">
+      <table>{children}</table>
+    </div>
+  ),
   a: ({ href = "", children }) =>
     href.startsWith("http") ? (
       <a href={href} target="_blank" rel="noopener noreferrer">
@@ -59,10 +84,12 @@ export default async function page({ params }) {
             description: blog.description,
             datePublished: blog.date,
             dateModified: blog.updated,
-            tags: blog.tags,
+            keywords: [...blog.tags, ...blog.keywords],
+            wordCount: blog.wordCount,
             image: blog.cover,
           }),
-          breadcrumbSchema(path, blog.title, { path: "/blog", name: "Blog" })
+          breadcrumbSchema(path, blog.title, { path: "/blog", name: "Blog" }),
+          ...(blog.faqs.length > 0 ? [faqPageSchema({ faqs: blog.faqs, path })] : [])
         )}
       />
       <article className="max-w-3xl mx-auto px-6 lg:px-8">
@@ -104,7 +131,22 @@ export default async function page({ params }) {
           />
         )}
 
-        <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-pre:rounded-xl">
+        {blog.headings.length >= 3 && (
+          <nav aria-label="On this page" className="bg-foreground/5 border border-foreground/10 rounded-2xl p-6 mb-12">
+            <h2 className="text-lg font-bold mb-4">On this page</h2>
+            <ol className="list-decimal ml-5 space-y-2 text-foreground/80">
+              {blog.headings.map((heading) => (
+                <li key={heading.id}>
+                  <a href={`#${heading.id}`} className="hover:text-blue-600 transition-colors">
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+
+        <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-blue-600 prose-pre:rounded-xl prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:border-blue-600 prose-blockquote:bg-blue-600/5 prose-blockquote:rounded-r-xl prose-blockquote:py-1 [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none">
           <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
             {blog.content}
           </ReactMarkdown>

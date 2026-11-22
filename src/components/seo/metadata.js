@@ -40,12 +40,13 @@ export function pageMetadata({ title, description, path }) {
   };
 }
 
-// Blog posts are Open Graph articles. A post's `cover` replaces the
-// site-wide image when it has one.
-export function articleMetadata({ title, description, path, publishedTime, modifiedTime, tags, image }) {
+// Blog posts are Open Graph articles. Their share image comes from
+// src/app/blog/[blog-id]/opengraph-image.js, which shows the post's title.
+export function articleMetadata({ title, description, path, publishedTime, modifiedTime, tags, keywords }) {
   return {
     title,
     description,
+    keywords: [...tags, ...keywords],
     alternates: { canonical: path },
     openGraph: {
       type: "article",
@@ -58,7 +59,6 @@ export function articleMetadata({ title, description, path, publishedTime, modif
       modifiedTime: modifiedTime ?? publishedTime,
       authors: [siteData.name],
       tags,
-      images: [image ? { url: image, alt: title } : ogImage],
     },
     twitter,
   };

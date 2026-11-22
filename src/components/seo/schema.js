@@ -118,11 +118,12 @@ export function webPageSchema({ type, path, name, description }) {
   };
 }
 
-export function faqPageSchema() {
+// Defaults to the site-wide FAQ on the home page.
+export function faqPageSchema({ faqs = faqData, path = "/" } = {}) {
   return {
     "@type": "FAQPage",
-    "@id": `${SITE_URL}/#faq`,
-    mainEntity: faqData.map(({ question, answer }) => ({
+    "@id": `${SITE_URL}${path}#faq`,
+    mainEntity: faqs.map(({ question, answer }) => ({
       "@type": "Question",
       name: question,
       acceptedAnswer: { "@type": "Answer", text: answer },
@@ -130,7 +131,7 @@ export function faqPageSchema() {
   };
 }
 
-export function blogPostingSchema({ path, title, description, datePublished, dateModified, tags, image }) {
+export function blogPostingSchema({ path, title, description, datePublished, dateModified, keywords, wordCount, image }) {
   return {
     "@type": "BlogPosting",
     "@id": `${SITE_URL}${path}#article`,
@@ -140,8 +141,9 @@ export function blogPostingSchema({ path, title, description, datePublished, dat
     description,
     datePublished,
     dateModified: dateModified ?? datePublished,
-    keywords: tags,
-    image: image?.startsWith("http") ? image : absoluteUrl(image ?? "/opengraph-image"),
+    keywords,
+    wordCount,
+    image: image?.startsWith("http") ? image : absoluteUrl(image ?? `${path}/opengraph-image`),
     inLanguage: "en",
     isPartOf: { "@id": WEBSITE_ID },
     author: { "@id": PERSON_ID },
