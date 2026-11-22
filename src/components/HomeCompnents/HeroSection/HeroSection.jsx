@@ -87,9 +87,14 @@ export default function HeroSection() {
               data-aos-delay="400"
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
             >
-              <button className="px-8 py-3.5 md:py-4 rounded-xl border-2 border-foreground font-semibold text-base md:text-lg hover:bg-foreground hover:text-background transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 w-full sm:w-auto text-center">
+              {/* Built from src/components/resume/resume.md by src/app/resume.pdf/route.js */}
+              <a
+                href="/resume.pdf"
+                download
+                className="px-8 py-3.5 md:py-4 rounded-xl border-2 border-foreground font-semibold text-base md:text-lg hover:bg-foreground hover:text-background transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 w-full sm:w-auto text-center"
+              >
                 Download Resume
-              </button>
+              </a>
 
               <Link href="/contact" className="px-8 py-3.5 md:py-4 rounded-xl bg-blue-600 font-semibold text-base md:text-lg text-white hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-blue-600/30 hover:-translate-y-1 w-full sm:w-auto text-center">
                 Contact Me
