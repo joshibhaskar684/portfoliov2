@@ -20,7 +20,7 @@
 
 **Email:** joshibhaskar684@gmail.com
 **Phone:** +91 6395653472
-**Portfolio:** https://bhaskarjoshi.quicksin.in
+**Portfolio:** [www.bhaskarjoshi.online](https://www.bhaskarjoshi.online)
 
 ## Professional Summary
 
