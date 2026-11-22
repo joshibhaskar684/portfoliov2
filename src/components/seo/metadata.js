@@ -32,3 +32,27 @@ export function pageMetadata({ title, description, path }) {
     twitter: { card: "summary_large_image" },
   };
 }
+
+// Blog posts are Open Graph articles. A post's `cover` replaces the
+// site-wide image when it has one.
+export function articleMetadata({ title, description, path, publishedTime, modifiedTime, tags, image }) {
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "article",
+      siteName: siteData.name,
+      locale: "en_US",
+      url: path,
+      title: `${title} | ${siteData.name}`,
+      description,
+      publishedTime,
+      modifiedTime: modifiedTime ?? publishedTime,
+      authors: [siteData.name],
+      tags,
+      images: [image ? { url: image, alt: title } : ogImage],
+    },
+    twitter: { card: "summary_large_image" },
+  };
+}

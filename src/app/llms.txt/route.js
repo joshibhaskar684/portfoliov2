@@ -1,3 +1,4 @@
+import { getAllBlogs } from "@/components/blogdata/blogs";
 import { SITE_URL, absoluteUrl, siteData } from "@/components/data/siteData";
 import { experienceData } from "@/components/data/experienceData";
 import { faqData } from "@/components/data/faqData";
@@ -10,6 +11,8 @@ export const dynamic = "force-static";
 export function GET() {
   const { name, nameHindi, githubUsername, jobTitle, company, description, email, location, education, social, systemDesignRepo, knowsAbout } =
     siteData;
+
+  const blogs = getAllBlogs();
 
   const lines = [
     `# ${name}`,
@@ -45,6 +48,9 @@ export function GET() {
     "",
     knowsAbout.join(", "),
     "",
+    ...(blogs.length > 0
+      ? ["## Blog", "", ...blogs.map((blog) => `- [${blog.title}](${absoluteUrl(`/blog/${blog.id}`)}) (${blog.date}): ${blog.description}`), ""]
+      : []),
     "## FAQ",
     "",
     ...faqData.flatMap(({ question, answer }) => [`### ${question}`, "", answer, ""]),
@@ -53,6 +59,7 @@ export function GET() {
     `- [Home](${absoluteUrl("/")}): Overview, projects, skills, experience and FAQ`,
     `- [About](${absoluteUrl("/about")}): Professional summary, experience timeline and education`,
     `- [Contact](${absoluteUrl("/contact")}): Email, phone, LinkedIn and GitHub`,
+    `- [Blog](${absoluteUrl("/blog")}): Articles on backend, cloud, system design and full-stack development`,
     "",
   ];
 

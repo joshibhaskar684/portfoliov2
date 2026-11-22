@@ -87,7 +87,7 @@ function websiteSchema() {
   };
 }
 
-// `type` is a schema.org WebPage subtype: ProfilePage, AboutPage or ContactPage.
+// `type` is a schema.org WebPage subtype: ProfilePage, AboutPage, ContactPage or CollectionPage.
 export function webPageSchema({ type, path, name, description }) {
   return {
     "@type": type,
@@ -114,13 +114,34 @@ export function faqPageSchema() {
   };
 }
 
-export function breadcrumbSchema(path, name) {
+export function blogPostingSchema({ path, title, description, datePublished, dateModified, tags, image }) {
+  return {
+    "@type": "BlogPosting",
+    "@id": `${SITE_URL}${path}#article`,
+    url: absoluteUrl(path),
+    mainEntityOfPage: absoluteUrl(path),
+    headline: title,
+    description,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    keywords: tags,
+    image: image?.startsWith("http") ? image : absoluteUrl(image ?? "/opengraph-image"),
+    inLanguage: "en",
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": PERSON_ID },
+  };
+}
+
+// `parent` ({ path, name }) adds a middle crumb, e.g. Home > Blog > Post.
+export function breadcrumbSchema(path, name, parent) {
+  const crumbs = [{ name: "Home", item: SITE_URL }];
+  if (parent) crumbs.push({ name: parent.name, item: absoluteUrl(parent.path) });
+  crumbs.push({ name, item: absoluteUrl(path) });
+
   return {
     "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name, item: absoluteUrl(path) },
-    ],
+    itemListElement: crumbs.map((crumb, index) => ({ "@type": "ListItem", position: index + 1, ...crumb })),
   };
 }
 
