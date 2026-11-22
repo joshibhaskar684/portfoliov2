@@ -23,6 +23,7 @@
     "axios": "^1.13.6",
     "js-cookie": "^3.0.5",
     "next": "16.2.1",
+    "nextjs-toploader": "^3.9.17",
     "nodemailer": "^8.0.4",
     "openai": "^6.33.0",
     "pdf-lib": "^1.17.1",
