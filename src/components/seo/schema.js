@@ -1,8 +1,23 @@
-import { SITE_URL, absoluteUrl, siteData } from "@/components/data/siteData";
+import { SITE_URL, absoluteUrl, siteData, socialProfiles } from "@/components/data/siteData";
+import { experienceData } from "@/components/data/experienceData";
 import { faqData } from "@/components/data/faqData";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
+
+function organization(name, url) {
+  return { "@type": "Organization", name, ...(url && { url }) };
+}
+
+// Earlier employers, once each, most recent first.
+function previousEmployers() {
+  const seen = new Set([siteData.company]);
+  return experienceData.flatMap(({ company, companyUrl }) => {
+    if (seen.has(company)) return [];
+    seen.add(company);
+    return [organization(company, companyUrl)];
+  });
+}
 
 function personSchema() {
   const {
@@ -10,15 +25,14 @@ function personSchema() {
     nameHindi,
     givenName,
     familyName,
-    githubUsername,
     jobTitle,
     company,
+    companyUrl,
     description,
     email,
     image,
     location,
     education,
-    social,
     knowsAbout,
   } = siteData;
 
@@ -26,9 +40,9 @@ function personSchema() {
     "@type": "Person",
     "@id": PERSON_ID,
     name,
-    // The GitHub handle (Google's ProfilePage docs use alternateName for
-    // handles) and the Hindi spelling, so searches for either resolve here.
-    alternateName: [githubUsername, nameHindi],
+    // Profile handles (Google's ProfilePage docs use alternateName for
+    // handles) and the Hindi spelling, so searches for any resolve here.
+    alternateName: [...new Set(socialProfiles.map(({ handle }) => handle.replace(/^@/, ""))), nameHindi],
     givenName,
     familyName,
     url: SITE_URL,
@@ -40,7 +54,9 @@ function personSchema() {
     email,
     jobTitle,
     description,
-    worksFor: { "@type": "Organization", name: company },
+    worksFor: organization(company, companyUrl),
+    // schema.org allows any Organization here, not only schools.
+    alumniOf: previousEmployers(),
     affiliation: {
       "@type": "CollegeOrUniversity",
       name: education.school,
@@ -69,7 +85,7 @@ function personSchema() {
       },
     },
     knowsAbout,
-    sameAs: [social.linkedin, social.github],
+    sameAs: socialProfiles.map(({ url }) => url),
   };
 }
 
@@ -79,7 +95,7 @@ function websiteSchema() {
     "@id": WEBSITE_ID,
     url: SITE_URL,
     name: siteData.name,
-    alternateName: `${siteData.name} Portfolio`,
+    alternateName: [`${siteData.name} Portfolio`, new URL(SITE_URL).hostname.replace(/^www\./, "")],
     description: siteData.description,
     inLanguage: "en",
     author: { "@id": PERSON_ID },

@@ -2,6 +2,7 @@
 
 export default function ExperienceCard({
   company,
+  companyUrl,
   role,
   duration,
   description,
@@ -16,7 +17,13 @@ export default function ExperienceCard({
             {role}
           </h3>
           <p className="text-blue-600 font-medium mt-1">
-            {company}
+            {companyUrl ? (
+              <a href={companyUrl} target="_blank" rel="noopener" className="hover:underline">
+                {company}
+              </a>
+            ) : (
+              company
+            )}
           </p>
         </div>
 

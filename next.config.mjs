@@ -16,11 +16,6 @@ const nextConfig = {
       permanent: true,
     }));
   },
-  async rewrites() {
-    // Browsers and crawlers request /favicon.ico without reading the page, so
-    // serve the generated icon there instead of a 404.
-    return [{ source: "/favicon.ico", destination: "/icon" }];
-  },
 };
 
 export default nextConfig;

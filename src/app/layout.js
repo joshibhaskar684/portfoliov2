@@ -35,9 +35,13 @@ export const metadata = {
       "max-video-preview": -1,
     },
   },
-  // Google Search Console HTML-tag verification; omitted when unset.
+  // Search Console / Webmaster Tools HTML-tag verification for Google, Bing
+  // (which also powers Yahoo, DuckDuckGo and Edge search) and Yandex; each
+  // tag is omitted when its variable is unset.
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.YANDEX_SITE_VERIFICATION,
+    other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION },
   },
 };
 

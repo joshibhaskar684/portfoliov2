@@ -4,7 +4,7 @@ import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/s
 
 const title = "Contact";
 const description =
-  "Contact Bhaskar Joshi, a Haldwani-based Software Engineer at Quana, by email, phone, LinkedIn or GitHub about projects, roles and collaborations.";
+  "Contact Bhaskar Joshi, a Haldwani-based Software Engineer at Quana, by email, phone, LinkedIn, GitHub, X or Instagram about projects, roles and collaborations.";
 
 // The contact page is a client component, so its metadata and structured
 // data are declared here instead.

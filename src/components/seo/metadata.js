@@ -9,6 +9,13 @@ const ogImage = {
   alt: `${siteData.name} – ${siteData.jobTitle} at ${siteData.company}`,
 };
 
+// Attributes shared links on X to the @handle.
+const twitter = {
+  card: "summary_large_image",
+  site: siteData.twitterHandle,
+  creator: siteData.twitterHandle,
+};
+
 // Next.js merges metadata shallowly, so every page builds its complete
 // canonical, Open Graph and Twitter set here. Twitter falls back to the
 // Open Graph title, description and image.
@@ -29,7 +36,7 @@ export function pageMetadata({ title, description, path }) {
       description,
       images: [ogImage],
     },
-    twitter: { card: "summary_large_image" },
+    twitter,
   };
 }
 
@@ -53,6 +60,6 @@ export function articleMetadata({ title, description, path, publishedTime, modif
       tags,
       images: [image ? { url: image, alt: title } : ogImage],
     },
-    twitter: { card: "summary_large_image" },
+    twitter,
   };
 }

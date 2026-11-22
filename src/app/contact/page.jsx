@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaEnvelope, FaPhone } from "react-icons/fa";
+import { socialProfiles } from "@/components/data/siteData";
+import { displayUrl, socialIcons } from "@/components/SocialLinks/socialIcons";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -33,18 +35,10 @@ export default function ContactPage() {
       value: "+91 6395653472",
       href: "tel:+916395653472",
     },
-    {
-      icon: <FaLinkedin className="text-xl" />,
-      label: "LinkedIn",
-      value: "linkedin.com/in/bhaskar-joshi-ji",
-      href: "https://linkedin.com/in/bhaskar-joshi-ji/",
-    },
-    {
-      icon: <FaGithub className="text-xl" />,
-      label: "GitHub",
-      value: "github.com/joshibhaskar684",
-      href: "https://github.com/joshibhaskar684",
-    },
+    ...socialProfiles.map(({ id, label, url }) => {
+      const Icon = socialIcons[id];
+      return { icon: <Icon className="text-xl" />, label, value: displayUrl(url), href: url, rel: "me" };
+    }),
   ];
 
   return (
@@ -77,7 +71,7 @@ export default function ContactPage() {
                   key={index}
                   href={link.href}
                   target={link.label !== "Email" && link.label !== "Phone" ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
+                  rel={link.rel ? `${link.rel} noopener noreferrer` : "noopener noreferrer"}
                   className="group flex items-center gap-5 p-4 rounded-2xl hover:bg-foreground/5 transition-colors duration-300 border border-transparent hover:border-foreground/10"
                 >
                   <div className="flex items-center justify-center w-14 h-14 rounded-full bg-blue-600/10 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm">
@@ -85,7 +79,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-foreground/60 mb-1">{link.label}</p>
-                    <p className="text-lg font-semibold text-foreground group-hover:text-blue-600 transition-colors">
+                    <p className="text-lg font-semibold text-foreground group-hover:text-blue-600 transition-colors break-all">
                       {link.value}
                     </p>
                   </div>

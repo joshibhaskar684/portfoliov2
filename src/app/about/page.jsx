@@ -1,5 +1,7 @@
+import { FaGlobe } from "react-icons/fa";
 import { experienceData } from "@/components/data/experienceData";
-import { SITE_URL } from "@/components/data/siteData";
+import { SITE_URL, socialProfiles } from "@/components/data/siteData";
+import { socialIcons } from "@/components/SocialLinks/socialIcons";
 import JsonLd from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/components/seo/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/schema";
@@ -68,7 +70,13 @@ export default function page() {
                   <div key={`${exp.company}-${exp.role}`} className="relative">
                     <div className="absolute -left-[35px] top-1.5 w-4 h-4 bg-background border-4 border-blue-600 rounded-full"></div>
                     <h3 className="text-xl font-bold text-foreground">{exp.role}</h3>
-                    <div className="text-blue-600 font-medium mb-2">{exp.company} <span className="text-foreground/50 mx-2">•</span> {exp.duration}</div>
+                    <div className="text-blue-600 font-medium mb-2">
+                      {exp.companyUrl ? (
+                        <a href={exp.companyUrl} target="_blank" rel="noopener" className="hover:underline">{exp.company}</a>
+                      ) : (
+                        exp.company
+                      )}{" "}
+                      <span className="text-foreground/50 mx-2">•</span> {exp.duration}</div>
                     <ul className="list-disc ml-5 space-y-1 text-foreground/80">
                       {exp.highlights.map((point) => (
                         <li key={point}>{point}</li>
@@ -123,14 +131,16 @@ export default function page() {
                 
                 <div className="pt-4 mt-4 border-t border-foreground/10 flex flex-col gap-3">
                   <a href={SITE_URL} className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                    <span>🌐</span> Portfolio Website
+                    <FaGlobe className="w-5 h-5 text-blue-600" aria-hidden="true" /> Portfolio Website
                   </a>
-                  <a href="https://linkedin.com/in/bhaskar-joshi-ji/" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                    <span>💼</span> LinkedIn Profile
-                  </a>
-                  <a href="https://github.com/joshibhaskar684" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                    <span>💻</span> GitHub (joshibhaskar684)
-                  </a>
+                  {socialProfiles.map(({ id, label, handle, url }) => {
+                    const Icon = socialIcons[id];
+                    return (
+                      <a key={id} href={url} target="_blank" rel="me noopener noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
+                        <Icon className="w-5 h-5 text-blue-600" aria-hidden="true" /> {label} ({handle})
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>
