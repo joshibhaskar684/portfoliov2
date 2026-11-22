@@ -1,11 +1,7 @@
 import { FaGlobe } from "react-icons/fa";
 import { experienceData } from "@/components/data/experienceData";
-<<<<<<< HEAD
-import { SITE_URL } from "@/components/data/siteData";
-=======
 import { SITE_URL, socialProfiles } from "@/components/data/siteData";
 import { socialIcons } from "@/components/SocialLinks/socialIcons";
->>>>>>> 29ea94ed391aad68b9a0f7b78a21840ecb75c6fd
 import JsonLd from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/components/seo/metadata";
 import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/schema";
@@ -135,17 +131,7 @@ export default function page() {
                 
                 <div className="pt-4 mt-4 border-t border-foreground/10 flex flex-col gap-3">
                   <a href={SITE_URL} className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-<<<<<<< HEAD
-                    <span>🌐</span> Portfolio Website
-                  </a>
-                  <a href="https://linkedin.com/in/bhaskar-joshi-ji/" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                    <span>💼</span> LinkedIn Profile
-                  </a>
-                  <a href="https://github.com/joshibhaskar684" target="_blank" rel="noreferrer" className="flex items-center gap-2 font-medium hover:text-blue-600 transition-colors">
-                    <span>💻</span> GitHub (joshibhaskar684)
-=======
                     <FaGlobe className="w-5 h-5 text-blue-600" aria-hidden="true" /> Portfolio Website
->>>>>>> 29ea94ed391aad68b9a0f7b78a21840ecb75c6fd
                   </a>
                   {socialProfiles.map(({ id, label, handle, url }) => {
                     const Icon = socialIcons[id];
