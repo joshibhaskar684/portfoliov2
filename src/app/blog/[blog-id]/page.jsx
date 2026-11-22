@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { formatBlogDate, getAllBlogs, getBlogById, slugify } from "@/components/blogdata/blogs";
+import { BLOG_NAME, formatBlogDate, getAllBlogs, getBlogById, slugify } from "@/components/blogdata/blogs";
+import AuthorCard from "@/components/Cards/AuthorCard/AuthorCard";
+import BlogCard from "@/components/Cards/BlogCard/BlogCard";
 import JsonLd from "@/components/seo/JsonLd";
 import { articleMetadata } from "@/components/seo/metadata";
 import { blogPostingSchema, breadcrumbSchema, faqPageSchema, jsonLdGraph } from "@/components/seo/schema";
@@ -73,21 +75,15 @@ export default async function page({ params }) {
   if (!blog) notFound();
 
   const path = `/blog/${blog.id}`;
+  const moreBlogs = getAllBlogs()
+    .filter((other) => other.id !== blog.id)
+    .slice(0, 2);
 
   return (
     <section className="min-h-screen bg-background text-foreground py-20">
       <JsonLd
         data={jsonLdGraph(
-          blogPostingSchema({
-            path,
-            title: blog.title,
-            description: blog.description,
-            datePublished: blog.date,
-            dateModified: blog.updated,
-            keywords: [...blog.tags, ...blog.keywords],
-            wordCount: blog.wordCount,
-            image: blog.cover,
-          }),
+          blogPostingSchema(blog, BLOG_NAME),
           breadcrumbSchema(path, blog.title, { path: "/blog", name: "Blog" }),
           ...(blog.faqs.length > 0 ? [faqPageSchema({ faqs: blog.faqs, path })] : [])
         )}
@@ -151,6 +147,19 @@ export default async function page({ params }) {
             {blog.content}
           </ReactMarkdown>
         </div>
+
+        <AuthorCard />
+
+        {moreBlogs.length > 0 && (
+          <section className="mt-16">
+            <h2 className="text-2xl font-bold mb-6">More from the blog</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {moreBlogs.map((other) => (
+                <BlogCard key={other.id} {...other} headingAs="h3" />
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="mt-16 pt-8 border-t border-foreground/10">
           <Link href="/blog" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors">

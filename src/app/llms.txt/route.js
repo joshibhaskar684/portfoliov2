@@ -5,7 +5,9 @@ import { faqData } from "@/components/data/faqData";
 import { projectsdata } from "@/components/data/projectsdat";
 
 // /llms.txt (https://llmstxt.org): a plain-Markdown profile for AI assistants,
-// built from the same data as the site so the two never drift apart.
+// built from the same data as the site so the two never drift apart. Articles
+// come right after the summary so assistants read them first; their full
+// text is in /llms-full.txt.
 export const dynamic = "force-static";
 
 export function GET() {
@@ -27,6 +29,25 @@ export function GET() {
     `- Website: ${SITE_URL}`,
     `- System design projects: ${systemDesignRepo}`,
     "",
+    ...(blogs.length > 0
+      ? [
+          "## Articles",
+          "",
+          `Full text of every article: ${absoluteUrl("/llms-full.txt")}`,
+          "",
+          ...blogs.flatMap((blog) => [
+            `### [${blog.title}](${absoluteUrl(`/blog/${blog.id}`)})`,
+            "",
+            `Published ${blog.date} by ${name} · ${blog.readingTime} min read · ${blog.tags.join(", ")}`,
+            "",
+            blog.description,
+            "",
+            ...(blog.faqs.length > 0
+              ? ["Questions this article answers:", "", ...blog.faqs.map(({ question }) => `- ${question}`), ""]
+              : []),
+          ]),
+        ]
+      : []),
     "## Profiles",
     "",
     ...socialProfiles.map(({ label, handle, url }) => `- ${label}: ${handle} (${url})`),
@@ -50,9 +71,6 @@ export function GET() {
     "",
     knowsAbout.join(", "),
     "",
-    ...(blogs.length > 0
-      ? ["## Blog", "", ...blogs.map((blog) => `- [${blog.title}](${absoluteUrl(`/blog/${blog.id}`)}) (${blog.date}): ${blog.description}`), ""]
-      : []),
     "## FAQ",
     "",
     ...faqData.flatMap(({ question, answer }) => [`### ${question}`, "", answer, ""]),
@@ -61,7 +79,9 @@ export function GET() {
     `- [Home](${absoluteUrl("/")}): Overview, projects, skills, experience and FAQ`,
     `- [About](${absoluteUrl("/about")}): Professional summary, experience timeline and education`,
     `- [Contact](${absoluteUrl("/contact")}): Email, phone and social profiles`,
-    `- [Blog](${absoluteUrl("/blog")}): Articles on backend, cloud, system design and full-stack development`,
+    `- [Blog](${absoluteUrl("/blog")}): Articles on backend, cloud, DevOps, security incidents and system design`,
+    `- [Blog RSS feed](${absoluteUrl("/blog/feed.xml")})`,
+    `- [Full article text for AI assistants](${absoluteUrl("/llms-full.txt")})`,
     "",
   ];
 

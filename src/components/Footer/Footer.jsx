@@ -19,6 +19,17 @@ export default function Footer() {
             </Link>. All rights reserved.
           </p>
           <p className="mt-1">Software Engineer · Haldwani, Uttarakhand, India</p>
+          <nav aria-label="Footer" className="flex justify-center md:justify-start gap-5 mt-3 font-semibold">
+            {[
+              { label: "About", href: "/about" },
+              { label: "Blog", href: "/blog" },
+              { label: "Contact", href: "/contact" },
+            ].map(({ label, href }) => (
+              <Link key={href} href={href} className="hover:text-blue-600 transition-colors duration-300">
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Social / Contact Links */}

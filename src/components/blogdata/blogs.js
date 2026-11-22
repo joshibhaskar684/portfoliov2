@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { siteData } from "@/components/data/siteData";
 
 // Every `.md` file in this folder is a blog post, and its file name is the
 // post's URL id: `my-first-post.md` is served at /blog/my-first-post.
@@ -8,6 +9,11 @@ import path from "node:path";
 const BLOG_DIR = path.join(process.cwd(), "src/components/blogdata");
 
 const WORDS_PER_MINUTE = 200;
+
+// Used by the /blog page, its structured data and the RSS feed.
+export const BLOG_NAME = `${siteData.name}'s Blog`;
+export const BLOG_DESCRIPTION =
+  "Write-ups by Bhaskar Joshi, a Software Engineer at Quana, on backend engineering, cloud, DevOps, security incidents and system design.";
 
 // A `## FAQ` or `## Frequently asked questions` section whose `###` headings
 // are questions becomes FAQPage structured data for the post.
@@ -91,6 +97,8 @@ function readBlog(id) {
     updated: data.updated || null,
     tags: data.tags ?? [],
     keywords: data.keywords ?? [],
+    about: data.about ?? [],
+    featured: data.featured === "true",
     cover: data.cover || null,
     draft: data.draft === "true",
     wordCount,
@@ -101,14 +109,14 @@ function readBlog(id) {
   };
 }
 
-// Published posts, newest first.
+// Published posts: featured ones first, then newest first.
 export function getAllBlogs() {
   return fs
     .readdirSync(BLOG_DIR)
     .filter((file) => file.endsWith(".md") && !file.startsWith("_"))
     .map((file) => readBlog(file.slice(0, -".md".length)))
     .filter((blog) => !blog.draft)
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => Number(b.featured) - Number(a.featured) || b.date.localeCompare(a.date));
 }
 
 export function getBlogById(id) {

@@ -34,7 +34,7 @@ export default function sitemap() {
       url: absoluteUrl(`/blog/${blog.id}`),
       lastModified: new Date(blog.updated ?? blog.date),
       changeFrequency: "monthly",
-      priority: 0.6,
+      priority: blog.featured ? 0.8 : 0.6,
     })),
   ];
 }

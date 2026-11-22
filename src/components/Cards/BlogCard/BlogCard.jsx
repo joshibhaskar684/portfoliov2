@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { formatBlogDate } from "@/components/blogdata/blogs";
 
-export default function BlogCard({ id, title, description, date, readingTime, tags, cover }) {
+// `headingAs` keeps the page outline right: h2 on /blog, h3 inside another section.
+export default function BlogCard({ id, title, description, date, readingTime, tags, cover, featured, headingAs: Heading = "h2" }) {
   return (
     <Link
       href={`/blog/${id}`}
@@ -21,14 +22,20 @@ export default function BlogCard({ id, title, description, date, readingTime, ta
 
       <div className="flex flex-col flex-grow p-6 md:p-8">
         <p className="text-sm text-foreground/60 mb-3">
+          {featured && (
+            <>
+              <span className="font-semibold text-blue-600">Featured</span>
+              <span className="mx-2">•</span>
+            </>
+          )}
           <time dateTime={date}>{formatBlogDate(date)}</time>
           <span className="mx-2">•</span>
           {readingTime} min read
         </p>
 
-        <h2 className="text-xl md:text-2xl font-bold line-clamp-2 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+        <Heading className="text-xl md:text-2xl font-bold line-clamp-3 mb-3 leading-tight group-hover:text-blue-600 transition-colors duration-300">
           {title}
-        </h2>
+        </Heading>
 
         <p className="text-foreground/70 text-sm md:text-base line-clamp-3 mb-6 flex-grow leading-relaxed">
           {description}

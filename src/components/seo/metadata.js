@@ -16,6 +16,12 @@ const twitter = {
   creator: siteData.twitterHandle,
 };
 
+// Every page points to the blog's RSS feed so feed readers and crawlers find it.
+const alternates = (path) => ({
+  canonical: path,
+  types: { "application/rss+xml": "/blog/feed.xml" },
+});
+
 // Next.js merges metadata shallowly, so every page builds its complete
 // canonical, Open Graph and Twitter set here. Twitter falls back to the
 // Open Graph title, description and image.
@@ -23,7 +29,7 @@ export function pageMetadata({ title, description, path }) {
   return {
     ...(title && { title }),
     description,
-    alternates: { canonical: path },
+    alternates: alternates(path),
     openGraph: {
       type: "profile",
       firstName: siteData.givenName,
@@ -47,7 +53,7 @@ export function articleMetadata({ title, description, path, publishedTime, modif
     title,
     description,
     keywords: [...tags, ...keywords],
-    alternates: { canonical: path },
+    alternates: alternates(path),
     openGraph: {
       type: "article",
       siteName: siteData.name,

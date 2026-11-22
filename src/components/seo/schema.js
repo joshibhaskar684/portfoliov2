@@ -4,6 +4,7 @@ import { faqData } from "@/components/data/faqData";
 
 const PERSON_ID = `${SITE_URL}/#person`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
+const BLOG_ID = `${SITE_URL}/blog#blog`;
 
 function organization(name, url) {
   return { "@type": "Organization", name, ...(url && { url }) };
@@ -131,21 +132,60 @@ export function faqPageSchema({ faqs = faqData, path = "/" } = {}) {
   };
 }
 
-export function blogPostingSchema({ path, title, description, datePublished, dateModified, keywords, wordCount, image }) {
+// A topic a post is about. CVE ids link to their official record so search
+// engines and AI assistants resolve them to the right vulnerability.
+function topic(name) {
+  return {
+    "@type": "Thing",
+    name,
+    ...(/^CVE-\d{4}-\d+$/.test(name) && { sameAs: `https://www.cve.org/CVERecord?id=${name}` }),
+  };
+}
+
+function blogReference(name) {
+  return { "@type": "Blog", "@id": BLOG_ID, name, url: absoluteUrl("/blog") };
+}
+
+// The blog itself, listing every post, for the /blog page.
+export function blogSchema({ name, description, blogs }) {
+  return {
+    ...blogReference(name),
+    description,
+    inLanguage: "en",
+    isPartOf: { "@id": WEBSITE_ID },
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": PERSON_ID },
+    blogPost: blogs.map((blog) => ({
+      "@type": "BlogPosting",
+      "@id": `${SITE_URL}/blog/${blog.id}#article`,
+      headline: blog.title,
+      url: absoluteUrl(`/blog/${blog.id}`),
+      datePublished: blog.date,
+    })),
+  };
+}
+
+// Takes a post from getBlogById(); `blogName` is the blog it belongs to.
+export function blogPostingSchema(blog, blogName) {
+  const path = `/blog/${blog.id}`;
+
   return {
     "@type": "BlogPosting",
     "@id": `${SITE_URL}${path}#article`,
     url: absoluteUrl(path),
     mainEntityOfPage: absoluteUrl(path),
-    headline: title,
-    description,
-    datePublished,
-    dateModified: dateModified ?? datePublished,
-    keywords,
-    wordCount,
-    image: image?.startsWith("http") ? image : absoluteUrl(image ?? `${path}/opengraph-image`),
+    headline: blog.title,
+    description: blog.description,
+    datePublished: blog.date,
+    dateModified: blog.updated ?? blog.date,
+    articleSection: blog.tags[0],
+    keywords: [...blog.tags, ...blog.keywords],
+    about: blog.about.map(topic),
+    wordCount: blog.wordCount,
+    timeRequired: `PT${blog.readingTime}M`,
+    image: blog.cover?.startsWith("http") ? blog.cover : absoluteUrl(blog.cover ?? `${path}/opengraph-image`),
     inLanguage: "en",
-    isPartOf: { "@id": WEBSITE_ID },
+    isPartOf: blogReference(blogName),
     author: { "@id": PERSON_ID },
     publisher: { "@id": PERSON_ID },
   };

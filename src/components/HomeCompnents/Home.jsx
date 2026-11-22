@@ -1,3 +1,4 @@
+import Blog from "./Blog/Blog";
 import Experience from "./Experience/Experience";
 import Faq from "./Faq/Faq";
 import HeroSection from "./HeroSection/HeroSection";
@@ -9,6 +10,7 @@ export default function Home() {
    <>
    <HeroSection/>
    <Projects/>
+   <Blog/>
 <SkillPage/>
 <Experience/>
 <Faq/>

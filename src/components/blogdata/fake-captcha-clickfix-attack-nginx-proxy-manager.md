@@ -3,6 +3,8 @@ title: Fake CAPTCHA on Our Website: Tracing a ClickFix Attack to an Nginx CVE
 description: Our staging site suddenly showed a fake CAPTCHA. Here's how we traced the ClickFix attack to an unpatched Nginx Proxy Manager (CVE-2026-123007) and fixed it.
 date: 2026-11-22
 tags: [Security, Nginx, DevOps, Incident Response]
+featured: true
+about: [ClickFix, Nginx, Nginx Proxy Manager, OpenResty, HTTP/2, CVE-2026-123007, CVE-2026-123633]
 keywords: [ClickFix attack, fake CAPTCHA on website, verify you are human malware, website hacked fake captcha, Nginx Proxy Manager hacked, Nginx Proxy Manager vulnerability, nginx HTTP/2 vulnerability, CVE-2026-123007, CVE-2026-123633, OpenResty vulnerability, malicious script injected into website, reverse proxy compromised, Docker latest tag not updating]
 ---
 

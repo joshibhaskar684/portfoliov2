@@ -1,12 +1,11 @@
-import { getAllBlogs } from "@/components/blogdata/blogs";
+import { BLOG_DESCRIPTION, BLOG_NAME, getAllBlogs } from "@/components/blogdata/blogs";
 import BlogCard from "@/components/Cards/BlogCard/BlogCard";
 import JsonLd from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/components/seo/metadata";
-import { breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/schema";
+import { blogSchema, breadcrumbSchema, jsonLdGraph, webPageSchema } from "@/components/seo/schema";
 
-const title = "Blog";
-const description =
-  "Articles by Bhaskar Joshi, a Software Engineer at Quana, on backend engineering, cloud, system design and full-stack development.";
+const title = "Blog: Backend, Cloud & Security Write-ups";
+const description = BLOG_DESCRIPTION;
 
 export const metadata = pageMetadata({ title, description, path: "/blog" });
 
@@ -18,7 +17,8 @@ export default function page() {
       <JsonLd
         data={jsonLdGraph(
           webPageSchema({ type: "CollectionPage", path: "/blog", name: `${title} | Bhaskar Joshi`, description }),
-          breadcrumbSchema("/blog", title)
+          blogSchema({ name: BLOG_NAME, description, blogs }),
+          breadcrumbSchema("/blog", "Blog")
         )}
       />
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -29,7 +29,7 @@ export default function page() {
             My <span className="text-blue-600">Blog</span>
           </h1>
           <p className="text-lg md:text-xl text-foreground/70 max-w-3xl">
-            Notes on backend engineering, cloud, system design and the things I learn while building software.
+            Notes on backend engineering, cloud, DevOps, security incidents and the things I learn while building software.
           </p>
           <div className="h-1 w-20 bg-blue-600 mt-6 rounded-full mx-auto lg:mx-0"></div>
         </div>
