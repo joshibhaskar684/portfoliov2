@@ -5,9 +5,9 @@ import { siteData } from "@/components/data/siteData";
 // The portrait in public/ is 570×713 on a white background.
 const SOURCE = { width: 570, height: 713 };
 
-// Square regions of the source ({ x, y, side }) used by generated images.
+// Square region of the source ({ x, y, side }) used by the Open Graph image.
+// Site icons are static files built by scripts/generate-icons.mjs.
 export const HEADSHOT_CROP = { x: 5, y: 10, side: 560 };
-export const FACE_CROP = { x: 30, y: 87, side: 440 };
 
 export async function loadPortrait() {
   const data = await readFile(join(process.cwd(), "public", siteData.image), "base64");

@@ -8,6 +8,19 @@ export const absoluteUrl = (path = "/") =>
   path === "/" ? SITE_URL : `${SITE_URL}${path}`;
 
 const githubUsername = "joshibhaskar684";
+const twitterHandle = "bhaskar_joshii";
+const instagramHandle = "bhaskar__joshi__";
+
+// Every public profile. Listed as `sameAs` in structured data and linked
+// with rel="me" in the footer, About and Contact pages, which is how search
+// engines connect these accounts to this site and to one person.
+export const socialProfiles = [
+  { id: "linkedin", label: "LinkedIn", handle: "bhaskar-joshi-ji", url: "https://www.linkedin.com/in/bhaskar-joshi-ji/" },
+  { id: "github", label: "GitHub", handle: githubUsername, url: `https://github.com/${githubUsername}` },
+  { id: "leetcode", label: "LeetCode", handle: githubUsername, url: `https://leetcode.com/u/${githubUsername}/` },
+  { id: "twitter", label: "X (Twitter)", handle: `@${twitterHandle}`, url: `https://x.com/${twitterHandle}` },
+  { id: "instagram", label: "Instagram", handle: `@${instagramHandle}`, url: `https://www.instagram.com/${instagramHandle}/` },
+];
 
 export const siteData = {
   name: "Bhaskar Joshi",
@@ -15,11 +28,13 @@ export const siteData = {
   givenName: "Bhaskar",
   familyName: "Joshi",
   githubUsername,
+  twitterHandle: `@${twitterHandle}`,
   jobTitle: "Software Engineer",
   company: "Quana",
-  title: "Bhaskar Joshi | Software Engineer from Haldwani, Uttarakhand",
+  companyUrl: "https://quana.ai",
+  title: "Bhaskar Joshi | Software Engineer at Quana, Haldwani",
   description:
-    "Bhaskar Joshi is a Software Engineer at Quana, based in Haldwani, India, building full-stack, backend and cloud systems with Java, Spring Boot, NestJS and AWS.",
+    "Bhaskar Joshi is a Software Engineer at Quana from Haldwani, Uttarakhand, India, building full-stack, backend and cloud systems with Java, Spring Boot, NestJS and AWS.",
   email: "joshibhaskar684@gmail.com",
   image: "/bhaskar-joshi.jpg",
   location: {
@@ -36,10 +51,6 @@ export const siteData = {
     school: "Surajmal University",
     city: "Kichha",
     years: "2023 – 2027",
-  },
-  social: {
-    linkedin: "https://www.linkedin.com/in/bhaskar-joshi-ji/",
-    github: `https://github.com/${githubUsername}`,
   },
   systemDesignRepo: `https://github.com/${githubUsername}/SystemDesign`,
   knowsAbout: [
@@ -75,14 +86,22 @@ export const siteData = {
     "GitHub Actions",
   ],
   keywords: [
+    "Bhaskar",
     "Bhaskar Joshi",
     "Bhaskar Joshi Software Engineer",
     "Bhaskar Joshi Quana",
-    "Bhaskar Joshi portfolio",
     "Bhaskar Joshi Haldwani",
+    "Bhaskar Joshi Uttarakhand",
+    "Bhaskar Joshi portfolio",
+    "Bhaskar Joshi developer",
+    "Bhaskar Joshi VhBuyio",
     "Bhaskar Joshi GitHub",
+    "Bhaskar Joshi LeetCode",
+    "Bhaskar Joshi LinkedIn",
     githubUsername,
-    `${githubUsername} GitHub`,
+    twitterHandle,
+    instagramHandle,
+    "Quana",
     "Software Engineer",
     "Software Engineer Haldwani",
     "Full Stack Developer",

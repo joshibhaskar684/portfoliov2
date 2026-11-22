@@ -9,6 +9,19 @@ const ogImage = {
   alt: `${siteData.name} – ${siteData.jobTitle} at ${siteData.company}`,
 };
 
+// Attributes shared links on X to the @handle.
+const twitter = {
+  card: "summary_large_image",
+  site: siteData.twitterHandle,
+  creator: siteData.twitterHandle,
+};
+
+// Every page points to the blog's RSS feed so feed readers and crawlers find it.
+const alternates = (path) => ({
+  canonical: path,
+  types: { "application/rss+xml": "/blog/feed.xml" },
+});
+
 // Next.js merges metadata shallowly, so every page builds its complete
 // canonical, Open Graph and Twitter set here. Twitter falls back to the
 // Open Graph title, description and image.
@@ -16,7 +29,7 @@ export function pageMetadata({ title, description, path }) {
   return {
     ...(title && { title }),
     description,
-    alternates: { canonical: path },
+    alternates: alternates(path),
     openGraph: {
       type: "profile",
       firstName: siteData.givenName,
@@ -29,6 +42,30 @@ export function pageMetadata({ title, description, path }) {
       description,
       images: [ogImage],
     },
-    twitter: { card: "summary_large_image" },
+    twitter,
+  };
+}
+
+// Blog posts are Open Graph articles. Their share image comes from
+// src/app/blog/[blog-id]/opengraph-image.js, which shows the post's title.
+export function articleMetadata({ title, description, path, publishedTime, modifiedTime, tags, keywords }) {
+  return {
+    title,
+    description,
+    keywords: [...tags, ...keywords],
+    alternates: alternates(path),
+    openGraph: {
+      type: "article",
+      siteName: siteData.name,
+      locale: "en_US",
+      url: path,
+      title: `${title} | ${siteData.name}`,
+      description,
+      publishedTime,
+      modifiedTime: modifiedTime ?? publishedTime,
+      authors: [siteData.name],
+      tags,
+    },
+    twitter,
   };
 }

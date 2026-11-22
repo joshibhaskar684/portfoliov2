@@ -1,8 +1,10 @@
 // Most recent first. `description` feeds the home page cards; `highlights`
-// feeds the timeline on the About page.
+// feeds the timeline on the About page. `companyUrl`, when known, links the
+// company name and identifies the employer in structured data.
 export const experienceData = [
   {
     company: "Quana",
+    companyUrl: "https://quana.ai",
     role: "Software Engineer",
     duration: "Sep 2026 – Present",
     description:
@@ -25,6 +27,7 @@ export const experienceData = [
   },
   {
     company: "VhBuyio",
+    companyUrl: "https://www.vhbuyio.in",
     role: "Backend Developer & DevOps Intern",
     duration: "Sep 2025 – Nov 2025",
     description:
@@ -37,6 +40,7 @@ export const experienceData = [
   },
   {
     company: "VhBuyio",
+    companyUrl: "https://www.vhbuyio.in",
     role: "Frontend Developer Intern",
     duration: "Jun 2025 – Aug 2025",
     description:

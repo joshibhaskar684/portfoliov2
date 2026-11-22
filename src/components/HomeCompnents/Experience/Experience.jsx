@@ -33,6 +33,7 @@ export default function Experience() {
             <ExperienceCard
               key={index}
               company={exp.company}
+              companyUrl={exp.companyUrl}
               role={exp.role}
               duration={exp.duration}
               description={exp.description}

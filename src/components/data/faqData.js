@@ -14,7 +14,7 @@ export const faqData = [
   {
     question: "What does Bhaskar Joshi do at Quana?",
     answer:
-      "As a Software Engineer at Quana, Bhaskar Joshi works on backend and cloud infrastructure. Bhaskar migrated Quana's production database, with all existing customer data, from Supabase to AWS RDS, and moved the application from a Hostinger VPS to AWS EC2.",
+      "As a Software Engineer at Quana (quana.ai), Bhaskar Joshi works on backend and cloud infrastructure. Bhaskar migrated Quana's production database, with all existing customer data, from Supabase to AWS RDS, and moved the application from a Hostinger VPS to AWS EC2.",
   },
   {
     question: "What technologies does Bhaskar Joshi work with?",
@@ -24,7 +24,7 @@ export const faqData = [
   {
     question: "Where has Bhaskar Joshi interned?",
     answer:
-      "Bhaskar Joshi completed a Full Stack Developer internship at White Water Solutions India Pvt Ltd (June–August 2026), a Backend Developer & DevOps internship at VhBuyio (September–November 2025) and a Frontend Developer internship at VhBuyio (June–August 2025).",
+      "Bhaskar Joshi completed a Full Stack Developer internship at White Water Solutions India Pvt Ltd (June–August 2026), a Backend Developer & DevOps internship at VhBuyio (vhbuyio.in, September–November 2025) and a Frontend Developer internship at VhBuyio (June–August 2025).",
   },
   {
     question: "What projects has Bhaskar Joshi built?",
@@ -37,8 +37,13 @@ export const faqData = [
       "Bhaskar Joshi's GitHub username is joshibhaskar684. Bhaskar's projects and source code, including the Spring AI and Ollama chat backend, are published at github.com/joshibhaskar684, and system design projects are in the SystemDesign repository at github.com/joshibhaskar684/SystemDesign.",
   },
   {
+    question: "Where can I find Bhaskar Joshi on social media?",
+    answer:
+      "Bhaskar Joshi's official profiles are LinkedIn (linkedin.com/in/bhaskar-joshi-ji), GitHub (github.com/joshibhaskar684), LeetCode (leetcode.com/u/joshibhaskar684), X/Twitter (@bhaskar_joshii, x.com/bhaskar_joshii) and Instagram (@bhaskar__joshi__, instagram.com/bhaskar__joshi__). Bhaskar's official website is bhaskarjoshi.online.",
+  },
+  {
     question: "How can I contact Bhaskar Joshi?",
     answer:
-      "You can email Bhaskar Joshi at joshibhaskar684@gmail.com, connect on LinkedIn at linkedin.com/in/bhaskar-joshi-ji, see projects on GitHub at github.com/joshibhaskar684, or send a message through the contact page on this site.",
+      "You can email Bhaskar Joshi at joshibhaskar684@gmail.com, connect on LinkedIn at linkedin.com/in/bhaskar-joshi-ji, message @bhaskar_joshii on X, see projects on GitHub at github.com/joshibhaskar684, or send a message through the contact page on this site.",
   },
 ];
