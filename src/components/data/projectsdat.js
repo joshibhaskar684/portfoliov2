@@ -8,7 +8,7 @@ export const projectsdata = [
     viewmore: "/",
   },
   {
-    image: "https://task.vhbuyio.in/Tasker.png",
+    image: "/task.png",
     title: "Tasker – Event-Driven Task Management System",
     description:
       "Tasker is a scalable task management system built using Next.js and Redux for a responsive frontend and Spring Boot for backend microservices. It leverages Kafka for event-driven communication and SMTP for real-time email notifications. The platform uses SQL for structured data storage and is designed to handle concurrent users efficiently with a modular and distributed architecture.",
