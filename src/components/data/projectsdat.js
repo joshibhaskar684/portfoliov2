@@ -18,7 +18,7 @@ export const projectsdata = [
 
   // ✅ NEW PROJECT ADDED
   {
-    image: "https://ai.vhbuyio.in/AyiraAi.png",
+    image: "/ai.png",
     title: "AI Chat Backend System | Local LLM Integration (Spring AI + Ollama)",
     description:
       "Built a lightweight AI-powered chat backend using Spring Boot, Spring AI, and Ollama, enabling interaction with locally hosted Large Language Models (LLMs) such as Llama 3. Designed and implemented RESTful APIs for real-time conversational AI interactions with stateless request handling. Integrated Ollama local inference server with Spring AI to enable offline, low-latency LLM execution without dependency on external APIs. Developed a modular service layer using Spring Boot architecture with clear separation of controller, service, and AI client integration for scalability. Configured and managed LLM inference through Spring AI abstractions, enabling easy model switching and prompt customization. Focused on privacy-first AI usage with fully local inference. Frontend support built using Next.js.",
